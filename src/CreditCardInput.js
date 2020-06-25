@@ -66,7 +66,6 @@ export default class CreditCardInput extends Component {
 
     additionalInputsProps: PropTypes.objectOf(PropTypes.shape(TextInput.propTypes)),
     isScrollHorizontal: PropTypes.bool,
-    containerStyles: PropTypes.object,
   };
 
   static defaultProps = {
@@ -95,7 +94,6 @@ export default class CreditCardInput extends Component {
     allowScroll: false,
     additionalInputsProps: {},
     isScrollHorizontal: true,
-    containerStyles: {},
   };
 
   componentDidMount = () => this._focus(this.props.focused);
@@ -149,7 +147,6 @@ export default class CreditCardInput extends Component {
       values: { number, expiry, cvc, name, type }, focused,
       allowScroll, requiresName, requiresCVC, requiresPostalCode,
       cardScale, cardFontFamily, cardBrandIcons, isScrollHorizontal,
-      containerStyles,
     } = this.props;
 
     return (
@@ -170,17 +167,21 @@ export default class CreditCardInput extends Component {
           keyboardShouldPersistTaps="always"
           scrollEnabled={allowScroll}
           showsHorizontalScrollIndicator={false}
-          style={[s.form, containerStyles]}>
+          style={s.form}>
           <CCInput {...this._inputProps("number")}
             keyboardType="numeric"
             containerStyle={[s.inputContainer, inputContainerStyle, { width: CARD_NUMBER_INPUT_WIDTH }]} />
-          <CCInput {...this._inputProps("expiry")}
-            keyboardType="numeric"
-            containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
-          { requiresCVC &&
-            <CCInput {...this._inputProps("cvc")}
-              keyboardType="numeric"
-              containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
+            <View style={{
+              flexDirection: 'row'
+            }}>
+              <CCInput {...this._inputProps("expiry")}
+                keyboardType="numeric"
+                containerStyle={[s.inputContainer, inputContainerStyle, { width: EXPIRY_INPUT_WIDTH }]} />
+              { requiresCVC &&
+                <CCInput {...this._inputProps("cvc")}
+                  keyboardType="numeric"
+                  containerStyle={[s.inputContainer, inputContainerStyle, { width: CVC_INPUT_WIDTH }]} /> }
+            </View>
           { requiresName &&
             <CCInput {...this._inputProps("name")}
               containerStyle={[s.inputContainer, inputContainerStyle, { width: NAME_INPUT_WIDTH }]} /> }
