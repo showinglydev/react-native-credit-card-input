@@ -65,7 +65,7 @@ export default class CreditCardInput extends Component {
     allowScroll: PropTypes.bool,
 
     additionalInputsProps: PropTypes.objectOf(PropTypes.shape(TextInput.propTypes)),
-    ...restProps,
+    isScrollHorizontal: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -93,6 +93,7 @@ export default class CreditCardInput extends Component {
     placeholderColor: "gray",
     allowScroll: false,
     additionalInputsProps: {},
+    isScrollHorizontal: true,
   };
 
   componentDidMount = () => this._focus(this.props.focused);
@@ -162,8 +163,7 @@ export default class CreditCardInput extends Component {
           expiry={expiry}
           cvc={cvc} />
         <ScrollView ref="Form"
-          {...restProps}
-          horizontal
+          horizontal={isScrollHorizontal}
           keyboardShouldPersistTaps="always"
           scrollEnabled={allowScroll}
           showsHorizontalScrollIndicator={false}
