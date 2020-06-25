@@ -65,6 +65,7 @@ export default class CreditCardInput extends Component {
     allowScroll: PropTypes.bool,
 
     additionalInputsProps: PropTypes.objectOf(PropTypes.shape(TextInput.propTypes)),
+    ...restProps,
   };
 
   static defaultProps = {
@@ -161,6 +162,7 @@ export default class CreditCardInput extends Component {
           expiry={expiry}
           cvc={cvc} />
         <ScrollView ref="Form"
+          {...restProps}
           horizontal
           keyboardShouldPersistTaps="always"
           scrollEnabled={allowScroll}
